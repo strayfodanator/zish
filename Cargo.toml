@@ -1,0 +1,80 @@
+[package]
+name = "zish"
+version = "0.1.0"
+edition = "2021"
+description = "A blazing-fast, fully customizable Linux shell"
+authors = ["zish contributors"]
+
+[[bin]]
+name = "zish"
+path = "src/main.rs"
+
+[dependencies]
+# Line editing, syntax highlighting, completions, hints
+reedline = "0.38"
+
+# Unix syscalls (fork, exec, signals, job control, termios)
+nix = { version = "0.29", features = ["process", "signal", "fs", "term", "ioctl"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Config (TOML deserialization)
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+
+# History database
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# Glob expansion
+glob = "0.3"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# CLI argument parsing
+clap = { version = "4", features = ["derive"] }
+
+# Terminal control
+crossterm = "0.28"
+
+# Lua plugin engine
+mlua = { version = "0.10", features = ["lua54", "vendored"] }
+
+# Regex (for prompt parsing, completions)
+regex = "1"
+
+# Shell-words tokenizer (for bash compat layer)
+shell-words = "1"
+
+# Directories (XDG base dirs)
+dirs = "5"
+
+# Random (session key for Starship)
+rand = "0.8"
+
+# Colored output
+nu-ansi-term = "0.50"
+
+# Fuzzy matching (for history search + case-insensitive completion)
+fuzzy-matcher = "0.3"
+
+# Lazy statics
+once_cell = "1"
+
+# Find executables in PATH (for starship detection)
+which = "6"
+
+# C stdlib bindings (for umask)
+libc = "0.2"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+
+[profile.dev]
+opt-level = 1
