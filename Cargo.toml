@@ -24,7 +24,7 @@ serde = { version = "1", features = ["derive"] }
 toml = "0.8"
 
 # History database
-rusqlite = { version = "0.31", features = ["bundled"] }
+rusqlite = { version = "0.31" }
 
 # Glob expansion
 glob = "0.3"
